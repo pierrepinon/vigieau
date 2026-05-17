@@ -125,6 +125,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             hass, dict(entry.data), entry.entry_id
         )
 
+    await hass.data[DOMAIN][entry.entry_id]["vigieau_coordinator"].async_config_entry_first_refresh()
+
     # will make sure async_setup_entry from sensor.py is called
     await hass.config_entries.async_forward_entry_setups(entry, [Platform.SENSOR])
 
